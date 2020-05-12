@@ -15,5 +15,10 @@ namespace BikeStore.Data
         }
 
         public DbSet<ProductTypes> ProductTypes { get; set; }
+
+        public DbSet<Products> Products { get; set; }
+        public DbSet<Stores> Stores{ get; set; }
+
+
     }
 }

@@ -1,10 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using BikeStore.Extensions
+@using BikeStore.Utility
+
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BikeStore</title>
-    
+
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -20,11 +25,37 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">BikeStore</a>
-         <div class="collapse navbar-collapse"> 
+        <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Product Types</a></li> 
+                <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Product Types</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Stores" asp-action="Index">Stores</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Products" asp-action="Index">Products</a></li>
+
+                @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart") != null)
+
+                {
+                    <li style="color:purple">
+                        <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i> &nbsp;
+                            @{
+                                var count = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ssShoppingCart").Count;
+                            }
+                            (@count)
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li style="color:purple">
+                        <a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="nav-link">
+                            <i class="fas fa-shopping-cart"></i> &nbsp;
+                           
+                            (0)
+                        </a>
+                    </li>
+                }
             </ul>
-            
+
         </div>
         <div>
             <partial name="_LoginPartial" />
