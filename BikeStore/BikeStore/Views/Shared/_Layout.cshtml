@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BikeStore</title>
-
+    
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/FontAwesome/fontawesome-free-5.13.0-web/css/all.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -21,7 +22,7 @@
         <a class="navbar-brand" href="#">BikeStore</a>
          <div class="collapse navbar-collapse"> 
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="#">Product Types</a></li> 
+                <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Product Types</a></li> 
             </ul>
             
         </div>
