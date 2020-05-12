@@ -18,6 +18,8 @@ namespace BikeStore.Data
 
         public DbSet<Products> Products { get; set; }
         public DbSet<Stores> Stores{ get; set; }
+        public DbSet<Reservations> Reservations { get; set; }
+        public DbSet<ProductsSelectForReservation> ProductsSelectForReservations { get; set; }
 
 
     }
