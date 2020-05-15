@@ -9,5 +9,8 @@ namespace BikeStore.Utility
     {
         public const string DefaultProductImage = "Default.png";
         public const string ImageFolder = @"images\ProductImage";
+
+        public const string AdminEndUser = "Admin";
+        public const string SuperAdminEndUser = "Super Admin";
     }
 }

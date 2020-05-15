@@ -1,0 +1,19 @@
+﻿@model BikeStore.Models.ViewModel.ShoppingCartViewModel
+
+@{
+    ViewData["Title"] = "ReservationConfirmation";
+}
+
+<br />
+<h2 class="text-info">Reservation Confirmation</h2>
+<div class="form-text">
+    Your Reservation has been submitted.
+</div>
+<br />
+
+<partial name="~/Views/Shared/_ReservationCustomerDetails.cshtml" model="Model.Reservations" />
+<br />
+
+<partial name="~/Views/Shared/_ReservationProductDetails.cshtml" model="Model.Products" />
+
+<a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-success"> Back to Products</a>

@@ -76,6 +76,39 @@ namespace BikeStore.Areas.Customer.Controllers
             return RedirectToAction("AppointmentConfirmation", "ShoppingCart", new { Id = reservationsId });
         }
 
+        public IActionResult Remove(int id)
+        {
+            List<int> lstCartItems = HttpContext.Session.Get<List<int>>("ssShoppingCart");
+
+            if(lstCartItems.Count > 0)
+            {
+                if (lstCartItems.Remove(id))
+                {
+                    lstCartItems.Remove(id);
+                }
+
+
+            }
+
+            HttpContext.Session.Set("ssShoppingCart", lstCartItems);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // Get
+        public IActionResult ReservationConfirmation (int id)
+        {
+            ShoppingCartVM.Reservations = _db.Reservations.Where(a => a.Id == id).FirstOrDefault();
+            List<ProductsSelectForReservation> objProdList = _db.ProductsSelectForReservations.Where(p => p.ReservationId == id).ToList();
+
+            foreach(ProductsSelectForReservation prodResObj in objProdList)
+            {
+                ShoppingCartVM.Products.Add(_db.Products.Include(p => p.ProductTypes).Include(p => p.Stores).Where(p => p.Id == prodResObj.ProductId).FirstOrDefault());
+            }
+
+            return View(ShoppingCartVM);
+        }
+
 
     }
 }

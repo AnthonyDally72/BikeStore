@@ -89,9 +89,9 @@ namespace BikeStore.Data.Migrations
 
                     b.Property<string>("CustomerEmail");
 
-                    b.Property<string>("CustomerPhoneNumber");
+                    b.Property<string>("CustomerName");
 
-                    b.Property<string>("Customername");
+                    b.Property<string>("CustomerPhoneNumber");
 
                     b.Property<DateTime>("ReservationDate");
 
@@ -170,6 +170,9 @@ namespace BikeStore.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -209,6 +212,8 @@ namespace BikeStore.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -279,6 +284,17 @@ namespace BikeStore.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("BikeStore.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Name");
+
+                    b.ToTable("ApplicationUser");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("BikeStore.Models.Products", b =>
